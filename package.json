@@ -1,0 +1,22 @@
+{
+  "name": "l.a.g.e.r",
+  "version": "1.0.0",
+  "description": "lager-handling-app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luxisapex/lager.git"
+  },
+  "keywords": [
+    "lager"
+  ],
+  "author": "JG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Luxisapex/lager/issues"
+  },
+  "homepage": "https://github.com/Luxisapex/lager#readme"
+}
