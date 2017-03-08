@@ -2,7 +2,7 @@
   "name": "l.a.g.e.r",
   "version": "1.0.0",
   "description": "lager-handling-app",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "test"
   },
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Luxisapex/lager/issues"
   },
-  "homepage": "https://github.com/Luxisapex/lager#readme"
+  "homepage": "https://github.com/Luxisapex/lager#readme",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
 }
