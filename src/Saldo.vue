@@ -26,6 +26,11 @@ import Cities from './Cities.vue'
 import Products from './Products.vue'
 
 export default {
+
+
+
+
+
   data () {
     return {
       phone: true,
@@ -34,8 +39,13 @@ export default {
       cupertino: true,
       norrkoping: true,
       frankfurt: true,
-      balances: []
+      balances: [],
+      balancesLocation: '../balances.json'
     }
+  },
+  components: {
+    'cities': Cities,
+    'products': Products
   },
   computed: {
     selected() {
@@ -57,9 +67,15 @@ export default {
       return norrkopingBalances.reduce((total, balance) => total += balance.amount, 0);
     }
   },
-  components: {
-    'cities': Cities,
-    'products': Products
+  methods: {
+    fetchBalances() {
+      fetch(this.balancesLocation)
+          .then(blob => blob.json())
+          .then(data => this.balances.push(...data));
+    }
+  },
+  beforeMount() {
+    this.fetchBalances()
   }
 }
 </script>
