@@ -1,0 +1,46 @@
+[
+  { "product": "Telephone",
+    "place": "Cupertino",
+    "amount": 170000
+  },
+  {
+    "product": "Telephone",
+    "place": "Norrkoping",
+    "amount": 55000
+  },
+  {
+    "product": "Telephone",
+    "place": "Frankfurt",
+    "amount": 101700
+  },
+  {
+    "product": "Pad",
+    "place": "Cupertino",
+    "amount": 41500
+  },
+  {
+    "product": "Pad",
+    "place": "Norrkoping",
+    "amount": 104300
+  },
+  {
+    "product": "Pad",
+    "place": "Frankfurt",
+    "amount": 72400
+  },
+  {
+    "product": "Watch",
+    "place": "Cupertino",
+    "amount": 90000
+  },
+  {
+    "product": "Watch",
+    "place": "Norrkoping",
+    "amount": 38000
+  },
+  {
+    "product": "Watch",
+    "place": "Frankfurt",
+    "amount": 25000
+  }
+]
