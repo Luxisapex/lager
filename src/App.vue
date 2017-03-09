@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <saldo></saldo>
+    <router-link to="/">Hem</router-link>
+    <router-link to="/lagersaldo">Lagersaldo</router-link>
     <h2>{{norrkopingTotal}}</h2>
     <ul class="balances">
       <li style="list-style-type: none" v-for="balance in balances">{{balance.product}} {{balance.place}} {{balance.amount}} </li>
     </ul>
+    <router-view></router-view>
   </div>
 </template>
 

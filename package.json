@@ -1,6 +1,6 @@
 {
-  "name": "lager",
-  "description": "lite arbete ger effektivt resursutnyttjande",
+  "name": "l.a.g.e.r",
+  "description": "lager-handling-app",
   "version": "1.0.0",
   "author": "JG",
   "private": true,
@@ -8,9 +8,6 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
-  "name": "l.a.g.e.r",
-  "version": "1.0.0",
-  "description": "lager-handling-app",
   "main": "main.js",
   "repository": {
     "type": "git",
@@ -19,14 +16,14 @@
   "keywords": [
     "lager"
   ],
-  "author": "JG",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Luxisapex/lager/issues"
   },
   "homepage": "https://github.com/Luxisapex/lager#readme",
   "dependencies": {
-    "vue": "^2.2.1"
+    "vue": "^2.2.1",
+    "vue-router": "^2.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
