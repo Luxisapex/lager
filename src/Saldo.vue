@@ -1,15 +1,18 @@
 <template lang="html">
   <div class="">
     <h1>{{phone}}{{pad}}{{watch}}{{cupertino}}{{norrkoping}}{{frankfurt}}</h1>
-    <selectors
-      :phone="phone" @phoneToggled="phone = $event"
-      :pad="pad" @padToggled="pad = $event"
-      :watch="watch" @watchToggled="watch = $event"
+    <cities
       :cupertino="cupertino" @cupertinoToggled="cupertino = $event"
       :norrkoping="norrkoping" @norrkopingToggled="norrkoping = $event"
       :frankfurt="frankfurt" @frankfurtToggled="frankfurt = $event"
-    >
-    </selectors>
+      >
+    </cities>
+    <products
+      :phone="phone" @phoneToggled="phone = $event"
+      :pad="pad" @padToggled="pad = $event"
+      :watch="watch" @watchToggled="watch = $event"
+      >
+    </products>
     <h2>{{norrkopingTotal}}</h2>
     <ul class="balances">
       <li style="list-style-type: none" v-show="phone && pad" v-for="balance in balances">{{balance.product}} {{balance.place}} {{balance.amount}} </li>
@@ -18,7 +21,10 @@
 </template>
 
 <script>
-import Selectors from './Selectors.vue'
+
+import Cities from './Cities.vue'
+import Products from './Products.vue'
+
 export default {
   data () {
     return {
@@ -97,7 +103,8 @@ export default {
     }
   },
   components: {
-    'selectors': Selectors
+    'cities': Cities,
+    'products': Products
   }
 }
 </script>
