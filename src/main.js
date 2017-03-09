@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 import App from './App.vue'
 
-import Navigation from './Navigation.vue'
 import Saldo from './Saldo.vue'
 import Transactions from './Transactions.vue'
 
