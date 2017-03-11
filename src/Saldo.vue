@@ -4,18 +4,13 @@
       <li style="list-style-type: none" class="col-md-4" v-for="balance in balances">{{balance.amount}} </li>
     </ul> -->
     <table class="table table-bordered">
-      <cities
-        :cupertino="cupertino" @cupertinoToggled="cupertino = $event"
-        :norrkoping="norrkoping" @norrkopingToggled="norrkoping = $event"
-        :frankfurt="frankfurt" @frankfurtToggled="frankfurt = $event"
-        >
-      </cities>
+      <city v-for="city in cities" :key="city.name" :city="city" @cityToggled="city.checked = $event"></city>
       <tr>
         <td class="field-label col-md-2 active">
           <label>Telefon</label>
         </td>
         <td class="col-md-2">
-          {{ balances[0] && phone && cupertino ? balances[0].amount : "Loading..." }}
+          {{ balances[0] && phone && cities[0].checked ? balances[0].amount : "Loading..." }}
         </td>
         <td class="col-md-2">
           {{ balances[1] ? balances[1].amount : "Loading..." }}
@@ -91,7 +86,7 @@
 
 <script>
 
-import Cities from './Cities.vue'
+import City from './City.vue'
 import Products from './Products.vue'
 
 export default {
@@ -105,12 +100,14 @@ export default {
       norrkoping: true,
       frankfurt: true,
       balances: [],
-      balancesLocation: '../balances.json'
+      balancesLocation: '../balances.json',
+
+      cities: [{name:'cupertino', checked : true }, {name: 'norrkoping', checked: true }, {name:'frankfurt', checked: true }],
     }
   },
 
   components: {
-    'cities': Cities,
+    'city': City,
     'products': Products
   },
 

@@ -18,10 +18,6 @@
     <td class="field-label col-md-2 active">
       <label>Total</label>
     </td>
-
-
-
-    
   </tr>
 </template>
 
