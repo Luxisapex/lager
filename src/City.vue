@@ -1,7 +1,7 @@
 <template lang="html">
   <!-- ev. binda till computed som tar this.city v-bind:class="{city}"-->
   <td class="field-label col-md-2 active">
-    <input type="checkbox" :value="city.checked" :id="city.name" @change="toggleCity">
+    <input type="checkbox" :value="city.checked" :id="city.name" @change="toggleCity" checked>
     <label> {{city.name}}</label>
   </td>
 </template>
@@ -11,7 +11,7 @@ export default {
   props: ['city'],
   data() {
     return {
-      toggled: false
+
     }
   },
   methods: {

@@ -1,84 +1,50 @@
 <template lang="html">
   <div class="">
-    <!-- <ul class="balances">
-      <li style="list-style-type: none" class="col-md-4" v-for="balance in balances">{{balance.amount}} </li>
-    </ul> -->
     <table class="table table-bordered">
-      <city v-for="city in cities" :key="city.name" :city="city" @cityToggled="city.checked = $event"></city>
+
+      <!-- Top row with city-selectors -->
+
       <tr>
-        <td class="field-label col-md-2 active">
-          <label>Telefon</label>
+        <td class="col-md-2 active">
+          <label class="field-label">SALDO</label>
         </td>
-        <td class="col-md-2">
-          {{ balances[0] && phone && cities[0].checked ? balances[0].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[1] ? balances[1].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[2] ? balances[2].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[0] && balances[1] && balances[2] ? balances[0].amount + balances[1].amount + balances[2].amount : "Loading..."}}
+        <city v-for="city in cities" :key="city.name" :city="city" @cityToggled="city.checked = $event"></city>
+        <td class="col-md-2 active">
+          <label class="field-label">Summa (markerade)</label>
         </td>
       </tr>
-      <tr>
-        <td class="field-label col-md-2 active">
-          <label>Platta</label>
+
+      <!-- Mid rows product-selectors, amounts and sums -->
+
+      <tr v-for="(product, pindex) in products">
+        <product :key="products[pindex].name" :product="products[pindex]" @productToggled="products[pindex].checked = $event"></product>
+        <td v-for="(city, cindex) in cities" class="col-md-2">
+          <span v-show="balance(pindex, cindex)">{{balances[3*pindex+cindex].amount}}</span>
         </td>
         <td class="col-md-2">
-          {{ balances[3] ? balances[3].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[4] ? balances[4].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[5] ? balances[5].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[3] && balances[4] && balances[5] ? balances[3].amount + balances[4].amount + balances[5].amount : "Loading..."}}
+          <span v-show="balance(pindex,-1)">{{balances[3*pindex].amount + balances[3*pindex+1].amount + balances[3*pindex+2].amount}}</span>
         </td>
       </tr>
+
+      <!--  Bottom row with only sums -->
+
       <tr>
         <td class="field-label col-md-2 active">
-          <label>Päronklocka</label>
+          <label>Summa (markerade)</label>
         </td>
+
+        <td v-for="(city, cindex) in cities" class="col-md-2">
+          <span v-show="balance(-1, cindex)">{{balances[cindex].amount + balances[cindex+3].amount + balances[cindex+6].amount}}</span>
+        </td>
+
         <td class="col-md-2">
-          {{ balances[6] ? balances[6].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[7] ? balances[7].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[8] ? balances[8].amount : "Loading..." }}
-        </td>
-        <td class="col-md-2">
-          {{ balances[6] && balances[7] && balances[8] ? balances[6].amount + balances[7].amount + balances[8].amount : "Loading..."}}
-        </td>
-      </tr>
-      <tr>
-        <td class="field-label col-md-2 active">
-          <label>Total</label>
-        </td>
-        <td class="col-md-2">
-          {{ balances[0] && balances[3] && balances[6] ? balances[0].amount + balances[3].amount + balances[6].amount : "Loading..."}}
-        </td>
-        <td class="col-md-2">
-          {{ balances[1] && balances[4] && balances[7] ? balances[1].amount + balances[4].amount + balances[7].amount : "Loading..."}}
-        </td>
-        <td class="col-md-2">
-          {{ balances[2] && balances[5] && balances[8] ? balances[2].amount + balances[5].amount + balances[8].amount : "Loading..."}}
-        </td>
-        <td class="col-md-2">
-          {{ balances[0] && balances[1] && balances[2]
-            && balances[3] && balances[4] && balances[5]
-            && balances[6] && balances[7] && balances[8]
-            ?
-            balances[0].amount + balances[1].amount + balances[2].amount +
+          <span v-show="balance(-1, -1)">
+            {{ balances[0].amount + balances[1].amount + balances[2].amount +
             balances[3].amount + balances[4].amount + balances[5].amount +
-            balances[6].amount + balances[7].amount + balances[8].amount
-            : "Loading..."}}
+            balances[6].amount + balances[7].amount + balances[8].amount}}
+          </span>
         </td>
+
       </tr>
     </table>
   </div>
@@ -87,34 +53,34 @@
 <script>
 
 import City from './City.vue'
-import Products from './Products.vue'
+import Product from './Product.vue'
 
 export default {
 
   data () {
     return {
-      phone: true,
-      pad: true,
-      watch: true,
-      cupertino: true,
-      norrkoping: true,
-      frankfurt: true,
       balances: [],
       balancesLocation: '../balances.json',
 
-      cities: [{name:'cupertino', checked : true }, {name: 'norrkoping', checked: true }, {name:'frankfurt', checked: true }],
+      cities: [
+        {name:'cupertino', checked : true },
+        {name: 'norrkoping', checked: true },
+        {name:'frankfurt', checked: true }
+      ],
+      products: [
+        {name:'phone', checked: true},
+        {name:'pad', checked: true},
+        {name:'watch', checked: true}
+      ]
     }
   },
 
   components: {
     'city': City,
-    'products': Products
+    'product': Product
   },
 
   computed: {
-    balance(place, product) {
-      return this.balances.filter(balance => balance.product === product && balance.place === place);
-    },
     phoneTotal: function() {
       let total = 0;
       for(let i = 0; i < this.balances.length; i++) {
@@ -131,6 +97,14 @@ export default {
   },
 
   methods: {
+    balance(productIndex, cityIndex) {
+      if(this.balances) {
+        if((productIndex === -1 || this.products[productIndex].checked) && (cityIndex === -1 || this.cities[cityIndex].checked)) {
+          return true;
+        }
+      }
+      return false;
+    },
     fetchBalances() {
       fetch(this.balancesLocation)
           .then(blob => blob.json())
