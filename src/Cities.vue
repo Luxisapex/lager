@@ -1,12 +1,28 @@
 <template lang="html">
-  <form class="cities">
-    <input type="checkbox" :value="cupertino" id="Cupertino" @change="toggleCupertino" checked>
-    <label for="Cupertino"> Cupertino</label>
-    <input type="checkbox" :value="norrkoping" id="Norrkoping" @change="toggleNorrkoping" checked>
-    <label for="Norrkoping"> Norrköping</label>
-    <input type="checkbox" :value="frankfurt" id="Frankfurt" @change="toggleFrankfurt" checked>
-    <label for="Frankfurt"> Frankfurt</label>
-  </form>
+  <tr class="city-row">
+    <td class="field-label col-md-2 active">
+      <label>SALDO</label>
+    </td>
+    <td class="field-label col-md-2 active">
+      <input type="checkbox" :value="cupertino" id="Cupertino" @change="toggleCupertino" checked>
+      <label for="Cupertino"> Cupertino</label>
+    </td>
+    <td class="field-label col-md-2 active">
+      <input type="checkbox" :value="norrkoping" id="Norrkoping" @change="toggleNorrkoping" checked>
+      <label for="Norrkoping"> Norrköping</label>
+    </td>
+    <td class="field-label col-md-2 active">
+      <input type="checkbox" :value="frankfurt" id="Frankfurt" @change="toggleFrankfurt" checked>
+      <label for="Frankfurt"> Frankfurt</label>
+    </td>
+    <td class="field-label col-md-2 active">
+      <label>Total</label>
+    </td>
+
+
+
+    
+  </tr>
 </template>
 
 <script>

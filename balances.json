@@ -1,15 +1,15 @@
 [
-  { "product": "Telephone",
+  { "product": "Phone",
     "place": "Cupertino",
     "amount": 170000
   },
   {
-    "product": "Telephone",
+    "product": "Phone",
     "place": "Norrkoping",
     "amount": 55000
   },
   {
-    "product": "Telephone",
+    "product": "Phone",
     "place": "Frankfurt",
     "amount": 101700
   },

@@ -26,7 +26,7 @@ export default {
     },
     togglePad() {
       this.pad = !this.pad;
-      this.$emit('phoneToggled', this.pad);
+      this.$emit('padToggled', this.pad);
     },
     toggleWatch() {
       this.watch = !this.watch;
