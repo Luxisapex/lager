@@ -124,7 +124,7 @@ export default {
         result = rightBalances.reduce((total, balance) => total + balance.amount, 0);
       }
       else {
-        result = this.balances[cindex+3*pindex].amount;
+        result = this.balances[cindex+this.cities.length*pindex].amount;
       }
       return this.addCommas(result);
     },
