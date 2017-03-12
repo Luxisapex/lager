@@ -19,10 +19,10 @@
       <tr v-for="(product, pindex) in products">
         <product :key="products[pindex].name" :product="products[pindex]" @productToggled="products[pindex].checked = $event"></product>
         <td v-for="(city, cindex) in cities" class="col-md-2">
-          <span v-show="balance(pindex, cindex)">{{balances[3*pindex+cindex].amount}}</span>
+          <span v-if="balanceExists(pindex, cindex)">{{ displaySum(pindex, cindex) }}</span>
         </td>
         <td class="col-md-2">
-          <span v-show="balance(pindex,-1)">{{balances[3*pindex].amount + balances[3*pindex+1].amount + balances[3*pindex+2].amount}}</span>
+          <span v-if="balanceExists(pindex,-1)">{{ displaySum(pindex, -1) }}</span>
         </td>
       </tr>
 
@@ -34,14 +34,12 @@
         </td>
 
         <td v-for="(city, cindex) in cities" class="col-md-2">
-          <span v-show="balance(-1, cindex)">{{balances[cindex].amount + balances[cindex+3].amount + balances[cindex+6].amount}}</span>
+          <span v-if="balanceExists(-1, cindex)">{{ displaySum(-1, cindex) }}</span>
         </td>
 
         <td class="col-md-2">
-          <span v-show="balance(-1, -1)">
-            {{ balances[0].amount + balances[1].amount + balances[2].amount +
-            balances[3].amount + balances[4].amount + balances[5].amount +
-            balances[6].amount + balances[7].amount + balances[8].amount}}
+          <span v-if="balanceExists(-1, -1)">
+            {{ displaySum(-1,-1) }}
           </span>
         </td>
 
@@ -62,6 +60,7 @@ export default {
       balances: [],
       balancesLocation: '../balances.json',
 
+      // cities: [],
       cities: [
         {name:'cupertino', checked : true },
         {name: 'norrkoping', checked: true },
@@ -81,23 +80,22 @@ export default {
   },
 
   computed: {
-    phoneTotal: function() {
-      let total = 0;
-      for(let i = 0; i < this.balances.length; i++) {
-        if(this.balances[i].product === "Telephone") {
-          total+= this.balances[i].amount;
-        }
-      }
-      return total;
-    },
-    norrkopingTotal: function() {
-      const norrkopingBalances = this.balances.filter(balance => balance.place === "Norrkoping");
-      return norrkopingBalances.reduce((total, balance) => total += balance.amount, 0);
-    }
+
   },
 
   methods: {
-    balance(productIndex, cityIndex) {
+    addCommas(nStr) {
+      nStr += '';
+      const x = nStr.split('.');
+      let x1 = x[0];
+      const x2 = x.length > 1 ? '.' + x[1] : '';
+      var rgx = /(\d+)(\d{3})/;
+      while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+      }
+      return x1 + x2;
+    },
+    balanceExists(productIndex, cityIndex) {
       if(this.balances) {
         if((productIndex === -1 || this.products[productIndex].checked) && (cityIndex === -1 || this.cities[cityIndex].checked)) {
           return true;
@@ -105,11 +103,39 @@ export default {
       }
       return false;
     },
+    displaySum(pindex, cindex) {
+      let result = 0;
+      if(cindex === -1 && pindex === -1) {
+        const checkedCityNames = this.cities.filter(city => city.checked).map(city => city.name);
+        const checkedProductNames = this.products.filter(product => product.checked).map(product => product.name);
+        const rightBalances = this.balances.filter(balance => checkedCityNames.indexOf(balance.city) !== -1 && checkedProductNames.indexOf(balance.product) !== -1);
+        result = rightBalances.reduce((total, balance) => total + balance.amount, 0);
+      }
+      else if(cindex === -1) {
+        const balancesWithRightProduct = this.balances.filter(balance => balance.product === this.products[pindex].name);
+        const checkedCityNames = this.cities.filter(city => city.checked).map(city => city.name);
+        const rightBalances = balancesWithRightProduct.filter(balance => checkedCityNames.indexOf(balance.city) !== -1);
+        result = rightBalances.reduce((total, balance) => total + balance.amount, 0);
+      }
+      else if(pindex === -1) {
+        const balancesWithRightCity = this.balances.filter(balance => balance.city === this.cities[cindex].name);
+        const checkedProductNames = this.products.filter(product => product.checked).map(product => product.name);
+        const rightBalances = balancesWithRightCity.filter(balance => checkedProductNames.indexOf(balance.product) !== -1);
+        result = rightBalances.reduce((total, balance) => total + balance.amount, 0);
+      }
+      else {
+        result = this.balances[cindex+3*pindex].amount;
+      }
+      return this.addCommas(result);
+    },
     fetchBalances() {
       fetch(this.balancesLocation)
           .then(blob => blob.json())
           .then(data => this.balances.push(...data));
-    }
+      // this.pushCities();
+      // this.pushProducts();
+    },
+
   },
 
   beforeMount() {

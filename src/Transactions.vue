@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="form-group">
+  <form class="form-group" action="/callingbackend">
     <label>Antal</label>
     <input type="text" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Antal produkter som flyttas">
     <label>Produkt</label>
@@ -19,8 +19,8 @@
       <option>Norrköping</option>
       <option>Frankfurt</option>
     </datalist>
-    <input type="submit" name="name" value="Lägg in order">
-  </div>
+    <input type="submit" value="Skicka">
+  </form>
 </template>
 
 <script>

@@ -1,46 +1,46 @@
 [
-  { "product": "Phone",
-    "place": "Cupertino",
+  { "product": "phone",
+    "city": "cupertino",
     "amount": 170000
   },
   {
-    "product": "Phone",
-    "place": "Norrkoping",
+    "product": "phone",
+    "city": "norrkoping",
     "amount": 55000
   },
   {
-    "product": "Phone",
-    "place": "Frankfurt",
+    "product": "phone",
+    "city": "frankfurt",
     "amount": 101700
   },
   {
-    "product": "Pad",
-    "place": "Cupertino",
+    "product": "pad",
+    "city": "cupertino",
     "amount": 41500
   },
   {
-    "product": "Pad",
-    "place": "Norrkoping",
+    "product": "pad",
+    "city": "norrkoping",
     "amount": 104300
   },
   {
-    "product": "Pad",
-    "place": "Frankfurt",
+    "product": "pad",
+    "city": "frankfurt",
     "amount": 72400
   },
   {
-    "product": "Watch",
-    "place": "Cupertino",
+    "product": "watch",
+    "city": "cupertino",
     "amount": 90000
   },
   {
-    "product": "Watch",
-    "place": "Norrkoping",
+    "product": "watch",
+    "city": "norrkoping",
     "amount": 38000
   },
   {
-    "product": "Watch",
-    "place": "Frankfurt",
+    "product": "watch",
+    "city": "frankfurt",
     "amount": 25000
   }
 ]
